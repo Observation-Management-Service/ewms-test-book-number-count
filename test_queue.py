@@ -4,13 +4,16 @@ from collections import Counter
 # import subprocess
 # from mqclient_pulsar import Queue
 import pulsar
+from common import get_token
+
+token = get_token("auth.token")
 
 client = pulsar.Client(
-    'pulsar://pulsar.api.jetstream.icecube.aq:6651',
-    authentication=pulsar.AuthenticationToken('eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0LXVzZXItd29yZHMiLCJleHAiOjE2NjI1ODMyNzN9.ts3xrJ1rB5G5HBS67CZSsOJ-Am5p35duSVK7l6AR5SDCiwuI9_aX-rhv9G6VaUxbqESInM83tx0yI8G53JMYOw')
+    'pulsar://pulsar.api.jetstream.rr.icecube.aq:6650',
+    authentication=pulsar.AuthenticationToken(token)
     )
 
-consumer = client.subscribe('persistent://test/dummy/laptop', "test-mctest")
+consumer = client.subscribe('persistent://test/pre-grid/book-out-test', "test-mctest")
 
 while True:
     msg = consumer.receive()

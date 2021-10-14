@@ -5,14 +5,10 @@ from collections import Counter
 # from mqclient_pulsar import Queue
 import pulsar
 import json
+from common import get_token
 
 def count_words(s: list) -> dict:
     return dict(Counter(s))
-
-def get_token(token_file: str) -> str:
-    with open(token_file, "r") as tf:
-        token = tf.read()
-    return token
 
 token = get_token("auth.token")
 
